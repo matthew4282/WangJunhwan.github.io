@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Title | EF 1003</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f9f7f4;
+      --card: #ffffff;
+      --text: #1a1a18;
+      --muted: #6b6b65;
+      --accent: #0f6e56;
+      --accent-light: #e1f5ee;
+      --border: #e3e0d8;
+      --tag-bg: #edf6f2;
+      --tag-text: #0f6e56;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(249,247,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 2.5rem;
+    }
+    .nav-back { font-size: 0.875rem; color: var(--muted); font-weight: 500; }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+    .nav-tag {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+    }
+
+    /* HERO */
+    .proj-hero {
+      max-width: 800px; margin: 4rem auto 0; padding: 0 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-course {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+    }
+    .proj-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem; line-height: 1.2; margin-bottom: 1.25rem;
+    }
+    .author-row {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.5rem;
+    }
+    .author-chip {
+      font-size: 0.8rem; font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .author-chip.leader { border-color: var(--accent); color: var(--accent); }
+    .proj-meta { font-size: 0.85rem; color: var(--muted); }
+    .btn-row { display: flex; gap: 0.6rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .btn {
+      font-size: 0.8rem; font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid #c0ddd4;
+    }
+    .btn:hover { background: #c9ead9; text-decoration: none; }
+
+    /* KEY IMAGE */
+    .teaser {
+      max-width: 800px; margin: 0 auto; padding: 2.5rem 2rem;
+    }
+    .teaser-img {
+      width: 100%; border-radius: 12px;
+      background: var(--accent-light);
+      border: 1px solid #aedcca;
+      min-height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 0.9rem;
+    }
+    .teaser-caption {
+      font-size: 0.8rem; color: var(--muted);
+      text-align: center; margin-top: 0.75rem;
+    }
+
+    /* SECTIONS */
+    section { max-width: 800px; margin: 0 auto 3.5rem; padding: 0 2rem; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--accent-light);
+    }
+    .prose { font-size: 0.95rem; color: var(--muted); }
+    .prose p { margin-bottom: 0.75rem; }
+
+    /* TWO COL */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+    }
+    .card-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); margin-bottom: 0.4rem; }
+    .card-body { font-size: 0.875rem; }
+
+    /* RESULT GRID */
+    .result-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .result-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .result-img {
+      width: 100%; background: var(--accent-light);
+      min-height: 140px; display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 0.8rem; border-bottom: 1px solid var(--border);
+    }
+    .result-caption { font-size: 0.8rem; color: var(--muted); padding: 0.6rem 0.8rem; }
+
+    /* TABLE */
+    .result-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    .result-table th {
+      text-align: left; font-weight: 500;
+      padding: 0.6rem 0.8rem;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .result-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .result-table tr:last-child td { border-bottom: none; }
+    .highlight td { color: var(--text); font-weight: 500; background: var(--tag-bg); }
+
+    /* DISCUSSION */
+    .disc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .disc-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem;
+    }
+    .disc-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .disc-body { font-size: 0.825rem; color: var(--muted); }
+
+    /* REFERENCES */
+    ol.refs { padding-left: 1.2rem; font-size: 0.85rem; color: var(--muted); }
+    ol.refs li { margin-bottom: 0.5rem; }
+
+    footer {
+      text-align: center; padding: 2.5rem 1rem;
+      font-size: 0.8rem; color: var(--muted);
+      border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+
+    @media (max-width: 580px) {
+      .two-col, .disc-grid { grid-template-columns: 1fr; }
+      .proj-title { font-size: 1.9rem; }
+      nav { padding: 0.75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">← Back to Profile</a>
+  <span class="nav-tag">EF 1003 · Term Project 1</span>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero">
+  <p class="proj-course">EF 1003 Data Literacy Foundation · May 2025</p>
+  <h1 class="proj-title">Your Project Title:<br>A Subtitle That Describes It</h1>
+
+  <div class="author-row">
+    <span class="author-chip leader">Your Name (Team Leader) · 20XXXXXX</span>
+    <span class="author-chip">Team Member Name · 20XXXXXX</span>
+    <span class="author-chip">Team Member Name · 20XXXXXX</span>
+  </div>
+  <p class="proj-meta">School of Energy Engineering, KENTECH</p>
+
+  <div class="btn-row">
+    <a class="btn" href="#">GitHub</a>
+    <a class="btn" href="#">Poster (PDF)</a>
+    <a class="btn" href="#">Dataset</a>
+  </div>
+</div>
+
+<!-- TEASER IMAGE -->
+<div class="teaser">
+  <div class="teaser-img">
+    <!-- Replace with: <img src="teaser.png" alt="Project overview figure" style="width:100%; border-radius:12px;"> -->
+    [ Insert main figure or demo image here ]
+  </div>
+  <p class="teaser-caption">Figure 1. Overview of the project pipeline / key results.</p>
+</div>
+
+<!-- 1. MOTIVATION -->
+<section id="motivation">
+  <p class="section-label">1. Motivation &amp; Problem Definition</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Problem</div>
+      <div class="card-body">Describe the problem you are solving in 2–3 concise sentences. What gap or challenge exists?</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Why It Matters</div>
+      <div class="card-body">Explain why this problem is important. What happens if it is not addressed? Who is affected?</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. DATASET & METHODS -->
+<section id="methods">
+  <p class="section-label">2. Dataset &amp; Methods</p>
+  <div class="two-col" style="margin-bottom: 1.25rem;">
+    <div class="card">
+      <div class="card-label">Dataset</div>
+      <div class="card-body">
+        Name of dataset, source, size.<br>
+        Key characteristics (# samples, features, labels, etc.).<br>
+        Any preprocessing steps applied.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Method / Algorithm</div>
+      <div class="card-body">
+        Name of the model or algorithm used.<br>
+        Key hyperparameters or settings.<br>
+        Why you chose this approach.
+      </div>
+    </div>
+  </div>
+  <!-- pipeline figure placeholder -->
+  <div class="teaser-img" style="min-height: 180px; border-radius: 12px; border: 1px solid #aedcca; display: flex; align-items: center; justify-content: center; background: var(--accent-light); color: var(--accent); font-size: 0.9rem;">
+    [ Insert pipeline / method diagram here ]
+  </div>
+  <p class="teaser-caption">Figure 2. Method pipeline.</p>
+</section>
+
+<!-- 3. EXPERIMENTS & RESULTS -->
+<section id="results">
+  <p class="section-label">3. Experiments &amp; Results</p>
+
+  <!-- result images -->
+  <div class="result-grid" style="margin-bottom: 1.5rem;">
+    <div class="result-card">
+      <div class="result-img">[ Result Image 1 ]</div>
+      <div class="result-caption">Caption for result 1.</div>
+    </div>
+    <div class="result-card">
+      <div class="result-img">[ Result Image 2 ]</div>
+      <div class="result-caption">Caption for result 2.</div>
+    </div>
+    <div class="result-card">
+      <div class="result-img">[ Result Image 3 ]</div>
+      <div class="result-caption">Caption for result 3.</div>
+    </div>
+  </div>
+
+  <!-- quantitative table -->
+  <div class="card">
+    <div class="card-label">Quantitative Comparison</div>
+    <table class="result-table" style="margin-top: 0.5rem;">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Metric 1</th>
+          <th>Metric 2</th>
+          <th>Metric 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Baseline A</td><td>00.0</td><td>00.0</td><td>00.0</td></tr>
+        <tr><td>Baseline B</td><td>00.0</td><td>00.0</td><td>00.0</td></tr>
+        <tr class="highlight"><td>Ours (Method Name)</td><td>00.0</td><td>00.0</td><td>00.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. DISCUSSION -->
+<section id="discussion">
+  <p class="section-label">4. Discussion &amp; Applications</p>
+  <div class="disc-grid">
+    <div class="disc-card">
+      <div class="disc-title">What We Learned</div>
+      <div class="disc-body">Key insight 1 from this project. Key insight 2. What surprised you?</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-title">Limitations</div>
+      <div class="disc-body">What doesn't work well? What assumptions were made? What data or resources were lacking?</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-title">Potential Applications</div>
+      <div class="disc-body">Where can this method or result be applied? Industry, research, society.</div>
+    </div>
+    <div class="disc-card">
+      <div class="disc-title">Future Work</div>
+      <div class="disc-body">How could you extend or improve this project? What would you do with more time/resources?</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. REFERENCES -->
+<section id="references">
+  <p class="section-label">5. References &amp; Acknowledgements</p>
+  <ol class="refs">
+    <li>Author, A. (Year). Title of paper. <em>Journal/Conference</em>, pages.</li>
+    <li>Author, B. (Year). Title of paper. <em>Journal/Conference</em>, pages.</li>
+    <li>Dataset source URL or citation.</li>
+  </ol>
+  <p style="font-size: 0.85rem; color: var(--muted); margin-top: 1rem;">
+    We thank [advisor/TA name] for guidance and feedback throughout this project.
+  </p>
+</section>
+
+<footer>
+  <p>EF 1003 Data Literacy Foundation · Term Project 1 · KENTECH · May 2025</p>
+  <p style="margin-top: 0.3rem;"><a href="index.html">← Back to personal page</a></p>
+</footer>
+
+</body>
+</html>
